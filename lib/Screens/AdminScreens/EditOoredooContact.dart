@@ -1,0 +1,207 @@
+// @dart=2.9
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import '../../Forms/ConstantIP.dart';
+
+class EditOoredooContact extends StatefulWidget {
+  final currentOoredoo;
+  final currentID;
+  EditOoredooContact(
+      {Key key, @required this.currentOoredoo, @required this.currentID})
+      : super(key: key);
+  @override
+  _EditOoredooContactState createState() => _EditOoredooContactState();
+}
+
+class _EditOoredooContactState extends State<EditOoredooContact> {
+  final _formKey = GlobalKey<FormState>();
+  final _ooredooController = TextEditingController();
+  var _ooredoo = '';
+
+
+
+  @override
+  void initState() {
+    _ooredooController
+      ..text = widget.currentOoredoo == null ? "" : widget.currentOoredoo;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _ooredooController.dispose();
+    super.dispose();
+  }
+
+  showFailedDialog(context, String title, String str) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(str),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("OK"))
+            ],
+          );
+        });
+  }
+
+  completeDonecorrect(context, String title, String str) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(str),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                   Navigator.of(context).pop();
+                  },
+                  child: Text("OK"))
+            ],
+          );
+        });
+  }
+
+  showLoaddingDialog(context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Row(
+              children: <Widget>[
+                Text("Loadding..."),
+                CircularProgressIndicator(),
+              ],
+            ),
+          );
+        });
+  }
+
+  Future<void> _pressSavePhone() async {
+    final isValid = _formKey.currentState.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      _formKey.currentState.save();
+      try {
+        showLoaddingDialog(context);
+        var data = {
+          "id": widget.currentID,
+          "ooredoo": _ooredoo,
+        };
+        var url = "http://"+ipAdressValue+"/HCare/EditContactUsOoredoo.php";
+        var response = await http.post(Uri.parse(url), body: data);
+        var responsebody = jsonDecode(response.body);
+        if (responsebody['status'] == "success") {
+          Navigator.of(context).pop();
+          completeDonecorrect(
+              context, "Edit ooredoo", "Edit ooredoo done successfully");
+        } else {
+          Navigator.of(context).pop();
+          showFailedDialog(context, "Edit ooredoo", "Edit ooredoo failed");
+        }
+      } catch (e) {
+        Navigator.of(context).pop();
+        print(e.toString());
+      }
+    }
+  }
+
+  
+
+  @override
+  Widget build(BuildContext context) {
+    var getAppHeight = AppBar().preferredSize.height;
+    var getWidth = MediaQuery.of(context).size.width;
+    var getHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Edit ooredoo"),
+          titleSpacing: 0,
+        elevation: 0,
+        backgroundColor: Theme.of(context).accentColor,
+        actions: <Widget>[
+          IconButton(
+            iconSize: getAppHeight * 0.5,
+            icon: Icon(Icons.save),
+            onPressed: (){_pressSavePhone();setState(() {
+              
+            });},
+          ),
+        ],
+      ),
+      body: Container(
+        margin: EdgeInsets.only(
+          top: getHeight * 0.05,
+        ),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                  "ooredoo",
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ),
+                subtitle: Container(
+                  margin: EdgeInsets.only(top: getHeight * 0.02),
+                  height: getHeight * 0.09,
+                  child: TextFormField(
+                    key: ValueKey('ooredoo'),
+                    controller: _ooredooController,
+                      keyboardType: TextInputType.number,
+                    textCapitalization: TextCapitalization.words,
+                    enableSuggestions: false,
+                    decoration: InputDecoration(
+                      errorStyle: TextStyle(
+                        fontSize: getWidth * 0.025,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    onSaved: (value) {
+                      _ooredoo = value.trim();
+                    },
+                    validator: (value) {
+                      if (value.isEmpty ) {
+                        return 'Ooredoo should not empty';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

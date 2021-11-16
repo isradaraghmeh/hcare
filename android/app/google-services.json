@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "339563712070",
+    "project_id": "learningcity-40696",
+    "storage_bucket": "learningcity-40696.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339563712070:android:ba1786abd6badbea1d8447",
+        "android_client_info": {
+          "package_name": "com.example.HCare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339563712070-6kliffh334bh6nkfnba0o3erco9fdcpd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXq046sM5pB5MbKa5_abGy88kxIfLmzjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339563712070-6kliffh334bh6nkfnba0o3erco9fdcpd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

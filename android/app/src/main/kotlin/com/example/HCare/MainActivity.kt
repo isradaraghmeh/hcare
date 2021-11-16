@@ -1,0 +1,6 @@
+package com.example.HCare
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
