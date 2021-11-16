@@ -6,7 +6,6 @@ import '../Screens/SignUpScreen.dart';
 import '../Screens/SignInScreen.dart';
 
 class SignUpAndSignInForm extends StatefulWidget {
- 
   @override
   _SignUpAndSignInFormState createState() => _SignUpAndSignInFormState();
 }
@@ -16,14 +15,14 @@ class _SignUpAndSignInFormState extends State<SignUpAndSignInForm>
   // bool _isStillLoaddingSignIn = false;
   // bool _isStillLoaddingSignUp = false;
 
-
-AnimationController _controller;
-Animation<double> _animation;
+  AnimationController _controller;
+  Animation<double> _animation;
   @override
   void initState() {
-    super.initState();  
-    _controller=AnimationController(vsync: this, duration: Duration(seconds:3));
-      _animation=CurvedAnimation(parent: _controller, curve: Curves.ease);
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.ease);
 
     _controller.forward();
   }
@@ -31,9 +30,8 @@ Animation<double> _animation;
   @override
   void dispose() {
     super.dispose();
-_controller.dispose();
+    _controller.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +41,7 @@ _controller.dispose();
         MediaQuery.of(context).orientation == Orientation.landscape;
     return ScaleTransition(
       scale: _animation,
-          child: Stack(
-
+      child: Stack(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
@@ -95,25 +92,24 @@ _controller.dispose();
                   ),
                   child: FlatButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
-                     // pushSignUpAfterLoading();
+                      Navigator.pushReplacementNamed(
+                          context, SignUpScreen.routeName);
+                      // pushSignUpAfterLoading();
                     },
-                      color: Colors.brown,
+                    color: Colors.brown,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                         getWidth * 0.1,
                       ),
                     ),
-                     child:
-                   
-                       Text(
-                            "Sign up",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize:14.0,
-                            ),
-                          ),
+                    child: Text(
+                      "Sign up",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -127,21 +123,6 @@ _controller.dispose();
                 ///
                 ///
                 ///
-               
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 Container(
                   height: isLandScape ? getHeight * 0.12 : getHeight * 0.08,
@@ -152,7 +133,8 @@ _controller.dispose();
                   ),
                   child: FlatButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+                      Navigator.pushReplacementNamed(
+                          context, SignInScreen.routeName);
                       //pushSignInAfterLoading();
                     },
                     color: Colors.black,
@@ -161,16 +143,14 @@ _controller.dispose();
                         getWidth * 0.1,
                       ),
                     ),
-                    child:
-                  
-                         Text(
-                            "Sign in",
-                            style: TextStyle(
-                                color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: getWidth * 0.04,
-                            ),
-                          ),
+                    child: Text(
+                      "Sign in",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: getWidth * 0.04,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -183,7 +163,7 @@ _controller.dispose();
                 ///
                 ///
                 ///
-                   Container(
+                Container(
                   height: isLandScape ? getHeight * 0.12 : getHeight * 0.08,
                   width: double.infinity,
                   margin: EdgeInsets.only(
@@ -202,7 +182,7 @@ _controller.dispose();
                   //     ),
                   //   ),
                   //    child:
-                   
+
                   //     //  Text(
                   //     //       "About us ",
                   //     //       style: TextStyle(
@@ -213,10 +193,11 @@ _controller.dispose();
                   //     //     ),
                   // ),
                 ),
+
+                ////jnjn m
                 SizedBox(
                   height: isLandScape ? getHeight * 0.05 : getHeight * 0.03,
                 ),
-
               ],
             ),
           ),
