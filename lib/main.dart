@@ -1,7 +1,7 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
- import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './Screens/SignUpScreen.dart';
 import './Screens/SignInScreen.dart';
 import './Screens/SignUpAndSignInScreen.dart';
@@ -12,22 +12,20 @@ import './Screens/UserScreens/MainUserScreen.dart';
 import './Screens/EmployeeScreens/EmployeePageSeeAppointment.dart';
 import './Screens/AdminScreens/MainAdminScreen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   bool isSplash = true;
-  String screen="login";
-
+  String screen = "login";
 
   void checkSplash() async {
     await Future.delayed(Duration(seconds: 5));
@@ -36,10 +34,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  
-
-
- 
   getPrefrences() async {
     SharedPreferences prefrences = await SharedPreferences.getInstance();
     setState(
@@ -47,10 +41,10 @@ class _MyAppState extends State<MyApp> {
         screen = prefrences.getString("screen");
       },
     );
-    if ( screen != null) {
+    if (screen != null) {
       setState(
         () {
-         screen=screen;
+          screen = screen;
         },
       );
     }
@@ -64,7 +58,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return MaterialApp(
       title: 'HCare',
@@ -74,21 +68,28 @@ class _MyAppState extends State<MyApp> {
           fontFamily: 'LeonSans',
           accentColor: Colors.green),
       home: Scaffold(
-       // body: SignUpScreen(),
-      body:   isSplash?SplashScreen():
-      
-        screen=="MainUserScreen"?MainUserScreen():
-        screen=="MainEmployeeScreen"?EmployeePageSeeAppointment():
-        screen=="MainAdminScreen"?MainAdminScreen():SignUpAndSignInScreen(),
+        // body: SignUpScreen(),
+        body: isSplash
+            ? SplashScreen()
+            : screen == "MainUserScreen"
+                ? MainUserScreen()
+                : screen == "MainEmployeeScreen"
+                    ? EmployeePageSeeAppointment()
+                    : screen == "MainAdminScreen"
+                        ? MainAdminScreen()
+                        : SignUpAndSignInScreen(),
       ),
       routes: {
         SignUpScreen.routeName: (ctx) => SignUpScreen(),
         SignInScreen.routeName: (ctx) => SignInScreen(),
-        MainUserScreen.routeName:(ctx)=>MainUserScreen(),
-        EmployeePageSeeAppointment.routeName:(ctx)=>EmployeePageSeeAppointment(),
-        MainAdminScreen.routeName:(ctx)=>MainAdminScreen(),
+        MainUserScreen.routeName: (ctx) => MainUserScreen(),
+        EmployeePageSeeAppointment.routeName: (ctx) =>
+            EmployeePageSeeAppointment(),
+        MainAdminScreen.routeName: (ctx) => MainAdminScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
   }
 }
+
+//hello
