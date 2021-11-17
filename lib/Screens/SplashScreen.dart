@@ -7,7 +7,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Container(
         alignment: Alignment.center,
-        child: Image.asset('assets/images/logos.png'),
+        child: Image.asset('assets/images/schoooool.png'),
         // Icon(Icons.favorite_border,color: Colors.red,),//  Image.asset('assets/images/logo.jpg'),
       ),
     );

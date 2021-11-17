@@ -46,7 +46,7 @@ class _SignUpAndSignInFormState extends State<SignUpAndSignInForm>
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/images/logg.jpg'),
+                  image: AssetImage('assets/images/school.png'),
                   fit: BoxFit.fill),
             ),
           ),
